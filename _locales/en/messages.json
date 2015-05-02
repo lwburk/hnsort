@@ -1,0 +1,7 @@
+{
+    "sort_by_label":{"message":"\u00a0\u00a0Sort by "},
+    "sort_by_number":{"message":"#"},
+    "sort_by_points":{"message":"points"},
+    "sort_by_age":{"message":"age"},
+    "sort_by_comments":{"message":"comments"}
+}

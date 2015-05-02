@@ -1,0 +1,2 @@
+insertControls();
+addStyleElement();

@@ -1,0 +1,27 @@
+{
+  "name": "hnsort",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Sort Hacker News",
+  "homepage_url": "http://wayneburkett.com",
+  "icons": {
+    "64": "icons/icon64.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://news.ycombinator.com/show*",
+        "https://news.ycombinator.com/new*",
+        "https://news.ycombinator.com/"
+      ],
+      "js": [
+        "js/sort.js",
+        "js/inject.js"
+      ]
+    }
+  ]
+}
