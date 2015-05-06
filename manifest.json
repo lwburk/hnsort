@@ -20,6 +20,8 @@
       ],
       "js": [
         "js/lib/jquery-2.1.4.min.js",
+        "js/lib/flight.min.js",
+        "js/components/sort_controls.js",
         "js/sort.js",
         "js/inject.js"
       ]
