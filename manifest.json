@@ -19,6 +19,7 @@
         "https://news.ycombinator.com/"
       ],
       "js": [
+        "js/lib/jquery-2.1.4.min.js",
         "js/sort.js",
         "js/inject.js"
       ]

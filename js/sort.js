@@ -1,23 +1,18 @@
-function $(id) {
-    return document.getElementById(id);
-}
-
+//
 // returns an array of "story" meta-objects
 function getStories(tbody) {
-    if (getStories._vals)
+    if (getStories._vals) {
         return getStories._vals;
-    var stories = document.evaluate("id('articlesTable')//tr[td[@class='title']]", tbody, null,     
-            XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+    }
     var triplets = [];
-    var length = stories.snapshotLength;
-    for (var i = 0; i < length - 1; i++) {
-        var headline = stories.snapshotItem(i);
-        var subtext = headline.nextElementSibling.getElementsByClassName("subtext")[0];
+    // the first trow of each story
+    $("#articlesTable tr.athing").each(function(i, el) {
+        var subtext = this.nextElementSibling.getElementsByClassName("subtext")[0];
         if (subtext) {
             addSubtextHooks(subtext);
-            triplets.push(createMetaObj(headline, i, length));
+            triplets.push(createMetaObj(this, i, length));
         }
-    }
+    });
     getStories._vals = triplets;
     return getStories._vals;
 }    
@@ -120,7 +115,7 @@ function updateStyles(selected) {
         comments: "#articlesTable .subtext a:last-child"
     };
     var styles = genStyles(selectors, selected);
-    $("hnsort").innerHTML = styles;
+    $("#hnsort").html(styles);
 }
 
 function createSortLink(text, sortKey) {
@@ -128,7 +123,7 @@ function createSortLink(text, sortKey) {
     link.appendChild(document.createTextNode(chrome.i18n.getMessage("sort_by_" + text)));
     link.href = "#";
     link.addEventListener("click", function(e) { 
-        var tbody = $("articlesTable").firstElementChild;
+        var tbody = $("#articlesTable tbody:first").get(0);
         sort(tbody, (sortKey || text), (link.style.fontWeight == "bold"));
         updateSelected(link);
         updateStyles(text);
@@ -138,7 +133,7 @@ function createSortLink(text, sortKey) {
 }
 
 function sort(tbody, sortKey, sorted) {
-    var refEl = tbody.lastElementChild.previousElementSibling;
+    var refEl = $(tbody).find("tr:nth-last-child(2)").get(0);
     (function(stories) {
         return sorted ? stories.reverse() : 
             stories.sort(function(a, b) { 
@@ -179,7 +174,7 @@ function insertControls() {
     var articlesTable = getArticlesTable();
     var linksWrapper = document.createElement("td"); 
     linksWrapper.id = "sortLinks";
-    linksWrapper.className = "title";
+    linksWrapper.className = "sort-action";
     articlesTable.id = "articlesTable";
     var links = [
         createSortLink("number", "rank"),
