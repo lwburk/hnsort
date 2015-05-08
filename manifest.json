@@ -5,7 +5,9 @@
   "description": "Sort Hacker News",
   "homepage_url": "http://wayneburkett.com",
   "icons": {
-    "64": "icons/icon64.png"
+    "64": "icons/icon64.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "default_locale": "en",
   "permissions": [
