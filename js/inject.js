@@ -1,4 +1,3 @@
-insertControls();
-addStyleElement();
 
-SortControls.attachTo("td#sortLinks.sort-action");
+Boot.attachTo("#hnmain table:has(tr.athing)");
+SortControls.attachTo("#sortLinks.sort-action");

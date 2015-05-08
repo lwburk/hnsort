@@ -3,31 +3,25 @@ var SortControls = (function() {
     function sortControls() {
 
         this.defaultAttrs({
-            // selectors
-            sortByCommentsSelector: 'a'
+            sortByLinksSelector: "a",
+            selectedClass: 'selected'
         });
 
-        this.restyleOnSelectionChange = function(ev, data) {
-    /*
-            if (data.selectedIds.length > 1) {
-              this.select('actionControlsSelector').not('button.single-item').removeAttr('disabled');
-              this.select('singleItemActionSelector').attr('disabled', 'disabled');
-            } else if (data.selectedIds.length == 1) {
-              this.select('actionControlsSelector').removeAttr('disabled');
-            } else {
-              this.disableAll();
-            }
-    */
-      };
+        this.markSelected = function(el) {
+            $(el).addClass(this.attr.selectedClass)
+                 .siblings("a")
+                 .removeClass(this.attr.selectedClass);
+        };
 
         this.sortBy = function(ev, data) {
-            console.log(ev);
-            console.log(data);
-        }
+            data.alreadySelected = $(data.el).hasClass(this.attr.selectedClass);
+            this.trigger(document, "uiSortBy", data);
+            this.markSelected(data.el);
+        };
 
         this.after('initialize', function() {
-            this.on('.sort-action', 'click', {
-                'sortByCommentsSelector': this.sortBy
+            this.on('click', {
+                'sortByLinksSelector': this.sortBy
             });
         });
     }
