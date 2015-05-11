@@ -1,10 +1,9 @@
 
-var Boot = (function() {
+var Stories = (function() {
 
     // creates a meta-object with details for the given 
     // headline; used later to determine sort order
     function createMetaObj(headline, pos, length) {
-        // TODO: this is really gross
         var subtext = headline.nextElementSibling;
         var res = subtext.textContent.split(/\s+/); 
         var isJobPosting = (res.length === 5);
@@ -39,8 +38,6 @@ var Boot = (function() {
         return mult;
     }
 
-    // wraps the "n hours ago" text in a span and gives it a class 
-    // name so that it's easier to select later
     function addSubtextHooks(subtext) {
         // the timestamp is now a link on regular posts, but not on job posts, for 
         // some reason, so we can identify a regular post by the presence of a 
@@ -50,7 +47,7 @@ var Boot = (function() {
         target.classList.add("age");
     }
 
-    function boot() {
+    function stories() {
 
         this.defaultAttrs({
             "articlesTableBodySelector": "tbody:first",
@@ -96,9 +93,12 @@ var Boot = (function() {
             if (!element) {
                 return;
             }
+            var sortKey = $(element).text();
+            var tbody = this.select("articlesTableBodySelector");
+            tbody.removeClass().addClass(sortKey);
             this.sort(
-                this.select("articlesTableBodySelector").get(0), 
-                $(element).text(), 
+                tbody.get(0),
+                sortKey === "#" ? "rank" : sortKey, 
                 data.alreadySelected);
         };
 
@@ -123,6 +123,6 @@ var Boot = (function() {
         });
     }
 
-    return flight.component(boot);
+    return flight.component(stories);
 
 })();

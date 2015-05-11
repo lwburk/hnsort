@@ -16,17 +16,20 @@
     {
       "run_at": "document_end",
       "matches": [
-        "https://news.ycombinator.com/show*",
-        "https://news.ycombinator.com/new*",
+        "https://news.ycombinator.com/show",
+        "https://news.ycombinator.com/newest",
+        "https://news.ycombinator.com/news",
         "https://news.ycombinator.com/"
+      ],
+      "css": [
+        "css/main.css"
       ],
       "js": [
         "js/lib/jquery-2.1.4.min.js",
         "js/lib/mustache.min.js",
         "js/lib/flight.min.js",
-        "js/components/boot.js",
+        "js/components/stories.js",
         "js/components/sort_controls.js",
-        "js/sort.js",
         "js/inject.js"
       ]
     }

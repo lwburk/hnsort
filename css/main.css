@@ -1,0 +1,14 @@
+.sort-action {
+    padding-bottom: 10px;
+}
+
+.sort-action a.selected {
+    font-weight: bold;
+}
+
+tbody.points .subtext .score,
+tbody.age td.subtext .age,
+tbody.comments .subtext a:last-child {
+    color: red;
+}
+
