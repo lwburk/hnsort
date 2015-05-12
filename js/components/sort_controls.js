@@ -13,8 +13,12 @@ var SortControls = (function() {
                  .removeClass(this.attr.selectedClass);
         };
 
+        this.isSelected = function(el) {
+            return $(el).hasClass(this.attr.selectedClass);
+        };
+
         this.sortBy = function(ev, data) {
-            data.alreadySelected = $(data.el).hasClass(this.attr.selectedClass);
+            data.alreadySelected = this.isSelected(data.el);
             this.trigger(document, "uiSortBy", data);
             this.markSelected(data.el);
         };

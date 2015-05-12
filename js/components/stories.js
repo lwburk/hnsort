@@ -79,13 +79,19 @@ var Stories = (function() {
 
         this.renderSortControls = function() {
             var template = 
-                '<div id="sortLinks" class="sort-action">&nbsp;&nbsp;Sort by\
-                    <a href="#" class="selected">#</a> |\
-                    <a href="#">points</a> |\
-                    <a href="#">age</a> |\
-                    <a href="#">comments</a>\
+                '<div id="sortLinks" class="sort-action">&nbsp;&nbsp;{{sort_by_label}}\
+                    <a href="#" class="selected">{{sort_by_number}}</a> |\
+                    <a href="#">{{sort_by_points}}</a> |\
+                    <a href="#">{{sort_by_age}}</a> |\
+                    <a href="#">{{sort_by_comments}}</a>\
                 </div>';
-            this.$node.before(template);
+            this.$node.before(Mustache.render(template, {
+                "sort_by_label": chrome.i18n.getMessage("sort_by_label"),
+                "sort_by_number": chrome.i18n.getMessage("sort_by_number"),
+                "sort_by_points": chrome.i18n.getMessage("sort_by_points"),
+                "sort_by_age": chrome.i18n.getMessage("sort_by_age"),
+                "sort_by_comments": chrome.i18n.getMessage("sort_by_comments")
+            }));
         };
 
         this.sortBy = function(ev, data) {
