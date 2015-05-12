@@ -1,8 +1,7 @@
-
 var Stories = (function() {
 
-    // creates a meta-object with details for the given 
-    // headline; used later to determine sort order
+    // creates a meta-object with details for the given headline; used later 
+    // to determine sort order
     function createMetaObj(headline, pos, length) {
         var subtext = headline.nextElementSibling;
         var res = subtext.textContent.split(/\s+/); 
@@ -50,8 +49,8 @@ var Stories = (function() {
     function stories() {
 
         this.defaultAttrs({
-            "articlesTableBodySelector": "tbody:first",
             "articlesSelector": "tr.athing",
+            "articlesTableBodySelector": "tbody:first",
             "lastArticleSelector": "tr:nth-last-child(2)"
         });
    
@@ -77,6 +76,15 @@ var Stories = (function() {
             this.$node.addClass("articles");
         };
 
+        this.messagesObject = function() {
+            var messages = {};
+            var labels = [].slice.call(arguments);
+            labels.forEach(function(label) {
+                messages[label] = chrome.i18n.getMessage(label);
+            });
+            return messages;
+        };
+
         this.renderSortControls = function() {
             var template = 
                 '<div id="sortLinks" class="sort-action">&nbsp;&nbsp;{{sort_by_label}}\
@@ -85,13 +93,9 @@ var Stories = (function() {
                     <a href="#">{{sort_by_age}}</a> |\
                     <a href="#">{{sort_by_comments}}</a>\
                 </div>';
-            this.$node.before(Mustache.render(template, {
-                "sort_by_label": chrome.i18n.getMessage("sort_by_label"),
-                "sort_by_number": chrome.i18n.getMessage("sort_by_number"),
-                "sort_by_points": chrome.i18n.getMessage("sort_by_points"),
-                "sort_by_age": chrome.i18n.getMessage("sort_by_age"),
-                "sort_by_comments": chrome.i18n.getMessage("sort_by_comments")
-            }));
+            var messages = this.messagesObject(
+                "sort_by_label", "sort_by_number", "sort_by_points", "sort_by_age", "sort_by_comments");
+            this.$node.before(Mustache.render(template, messages));
         };
 
         this.sortBy = function(ev, data) {
