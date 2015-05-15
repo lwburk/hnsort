@@ -2,7 +2,7 @@ var Stories = (function() {
 
     // creates a meta-object with details for the given headline; used later 
     // to determine sort order
-    function createMetaObj(headline, pos, length) {
+    function createMetaObj(headline, pos) {
         var subtext = headline.nextElementSibling;
         var res = subtext.textContent.split(/\s+/); 
         var isJobPosting = (res.length === 5);
@@ -10,7 +10,7 @@ var Stories = (function() {
         var commentsPos = (res[9] === "flag") ? 11 : 9;
         return {
             elements: [headline, subtext, subtext.nextElementSibling],
-            rank: length - pos,
+            rank: -pos,
             points: !isJobPosting ? parseInt(res[1], 10) : 0,
             comments: !isJobPosting ? (parseInt(res[commentsPos], 10) || 0) : -1,
             age: (new Date()).getTime() - 
@@ -37,43 +37,29 @@ var Stories = (function() {
         return mult;
     }
 
-    function addSubtextHooks(subtext) {
-        // the timestamp is now a link on regular posts, but not on job posts, for 
-        // some reason, so we can identify a regular post by the presence of a 
-        // timestamp link
-        var timeLink = subtext.getElementsByTagName("a")[1];
-        var target = timeLink || subtext
-        target.classList.add("age");
-    }
-
     function stories() {
 
-        this.defaultAttrs({
-            "articlesSelector": "tr.athing",
-            "articlesTableBodySelector": "tbody:first",
-            "lastArticleSelector": "tr:nth-last-child(2)"
+        this.attributes({
+            "articles": "tr.athing",
+            "articlesTableBody": "tbody:first",
+            "lastArticle": "tr.spacer:last",
+            "ageLinks": ".subtext a:contains(' ago')",
+            "commentLinks": ".subtext a:contains('comment')",
+            "jobPostingSubtext": ".subtext:not(:has(a))"
         });
    
         // returns an array of "story" meta-objects
         this.getStories = function() {
-            if (this.getStories._vals) {
-                return this.getStories._vals;
-            }
-            var triplets = [];
-            // the first row of each story
-            this.select("articlesSelector").each(function(i, el) {
-                var subtext = this.nextElementSibling.getElementsByClassName("subtext")[0];
-                if (subtext) {
-                    addSubtextHooks(subtext);
-                    triplets.push(createMetaObj(this, i, length));
-                }
-            });
-            this.getStories._vals = triplets;
-            return this.getStories._vals;
+            return this.select("articles").map(function(i, el) {
+                return createMetaObj(this, i);
+            }).get();
         };
 
         this.setupArticlesTable = function() {
             this.$node.addClass("articles");
+            this.select("ageLinks").addClass("age");
+            this.select("jobPostingSubtext").addClass("age");
+            this.select("commentLinks").addClass("comments");
         };
 
         this.messagesObject = function() {
@@ -104,7 +90,7 @@ var Stories = (function() {
                 return;
             }
             var sortKey = $(element).text();
-            var tbody = this.select("articlesTableBodySelector");
+            var tbody = this.select("articlesTableBody");
             tbody.removeClass().addClass(sortKey);
             this.sort(
                 tbody.get(0),
@@ -113,7 +99,7 @@ var Stories = (function() {
         };
 
         this.sort = function(tbody, sortKey, sorted) {
-            var refEl = this.select("lastArticleSelector").get(0);
+            var refEl = this.select("lastArticle").next().get(0);
             (function(stories) {
                 return sorted ? stories.reverse() : 
                     stories.sort(function(a, b) { 
