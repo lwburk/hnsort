@@ -2,7 +2,7 @@ var SortControls = (function() {
 
     function sortControls() {
 
-        this.defaultAttrs({
+        this.attributes({
             sortByLinksSelector: "a",
             selectedClass: 'selected'
         });

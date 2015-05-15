@@ -7,8 +7,9 @@
 }
 
 tbody.points .subtext .score,
-tbody.age td.subtext .age,
-tbody.comments .subtext a:last-child {
+tbody.age .subtext.age, /* job posting */
+tbody.age .subtext .age,
+tbody.comments .subtext .comments {
     color: red;
 }
 
