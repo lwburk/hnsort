@@ -4,17 +4,18 @@ var Stories = (function() {
     // to determine sort order
     function createMetaObj(headline, pos) {
         var subtext = headline.nextElementSibling;
-        var res = subtext.textContent.split(/\s+/); 
-        var isJobPosting = (res.length === 5);
-        var agePos = isJobPosting ? 1 : 5;
-        var commentsPos = (res[9] === "flag") ? 11 : 9;
+        var res = subtext.textContent.trim().split(/\s+/); 
+        var isJobPosting = (res.length === 3);
+        var agePos = isJobPosting ? 0 : 4;
+        var commentsPos = (res[8] === "flag") ? 10 : 8;
         return {
             elements: [headline, subtext, subtext.nextElementSibling],
             rank: -pos,
-            points: !isJobPosting ? parseInt(res[1], 10) : 0,
+            points: !isJobPosting ? parseInt(res[0], 10) : 0,
             comments: !isJobPosting ? (parseInt(res[commentsPos], 10) || 0) : -1,
             age: (new Date()).getTime() - 
-                    (parseInt(res[agePos], 10) * getMultiplier(res[agePos + 1]))
+                    (parseInt(res[agePos], 10) * getMultiplier(res[agePos + 1])),
+            parts: res // this is really just for debugging
         }
     }
 
@@ -37,6 +38,8 @@ var Stories = (function() {
         return mult;
     }
 
+    var _stories = null;
+
     function stories() {
 
         this.attributes({
@@ -50,9 +53,12 @@ var Stories = (function() {
    
         // returns an array of "story" meta-objects
         this.getStories = function() {
-            return this.select("articles").map(function(i, el) {
-                return createMetaObj(this, i);
-            }).get();
+            if (!_stories) {
+                _stories = this.select("articles").map(function(i, el) {
+                    return createMetaObj(this, i);
+                }).get();
+            }
+            return _stories;
         };
 
         this.setupArticlesTable = function() {
