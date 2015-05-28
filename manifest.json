@@ -18,6 +18,7 @@
       "matches": [
         "https://news.ycombinator.com/show",
         "https://news.ycombinator.com/newest",
+        "https://news.ycombinator.com/newest?next=*",
         "https://news.ycombinator.com/news",
         "https://news.ycombinator.com/news?p=*",
         "https://news.ycombinator.com/submitted?id=*",
