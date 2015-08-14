@@ -80,10 +80,10 @@ var Stories = (function() {
         this.renderSortControls = function() {
             var template = 
                 '<div id="sortLinks" class="sort-action">&nbsp;&nbsp;{{sort_by_label}}\
-                    <a href="#" class="selected">{{sort_by_number}}</a> |\
-                    <a href="#">{{sort_by_points}}</a> |\
-                    <a href="#">{{sort_by_age}}</a> |\
-                    <a href="#">{{sort_by_comments}}</a>\
+                    <a href="#" data-key="#" class="selected">{{sort_by_number}}</a> |\
+                    <a href="#" data-key="points">{{sort_by_points}}</a> |\
+                    <a href="#" data-key="age">{{sort_by_age}}</a> |\
+                    <a href="#" data-key="comments">{{sort_by_comments}}</a>\
                 </div>';
             var messages = this.messagesObject(
                 "sort_by_label", "sort_by_number", "sort_by_points", "sort_by_age", "sort_by_comments");
@@ -95,7 +95,7 @@ var Stories = (function() {
             if (!element) {
                 return;
             }
-            var sortKey = $(element).text();
+            var sortKey = $(element).data("key");
             var tbody = this.select("articlesTableBody");
             tbody.removeClass().addClass(sortKey);
             this.sort(
