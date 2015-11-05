@@ -2,6 +2,8 @@
 
 A Chrome extension for sorting stories on Hacker News
 
+## Screenshot
+
 ![screenshot](other/sort_by_comments.png)
 
 ## Installation
