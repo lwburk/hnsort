@@ -4,19 +4,26 @@ var Stories = (function() {
     // to determine sort order
     function createMetaObj(headline, pos) {
         var subtext = headline.nextElementSibling;
-        var res = subtext.textContent.trim().split(/\s+/); 
-        var isJobPosting = (res.length === 3);
-        var agePos = isJobPosting ? 0 : 4;
-        var commentsPos = (res[8] === "flag") ? 10 : 8;
-        return {
+        var fields = subtext.textContent.trim().split(/\s+/); 
+        var meta = {
             elements: [headline, subtext, subtext.nextElementSibling],
             rank: -pos,
-            points: !isJobPosting ? parseInt(res[0], 10) : 0,
-            comments: !isJobPosting ? (parseInt(res[commentsPos], 10) || 0) : -1,
-            age: (new Date()).getTime() - 
-                    (parseInt(res[agePos], 10) * getMultiplier(res[agePos + 1])),
-            parts: res // this is really just for debugging
-        }
+            parts: fields, // this is really just for debugging
+            points: 0,
+            comments: 0,
+            age: 0
+        };
+        fields.forEach(function(val, i, arr) {
+            if (val === "points") {
+                meta["points"] = parseInt(fields[i - 1], 10);
+            } else if (val === "comments" || val === "comment") {
+                meta["comments"] = parseInt(fields[i - 1], 10);
+            } else if (val === "ago") {
+                meta["age"] = (new Date()).getTime() - 
+                    (parseInt(fields[i - 2], 10) * getMultiplier(fields[i - 1]));
+            } 
+        });
+        return meta;
     }
 
     function getMultiplier(unit) {

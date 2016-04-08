@@ -21,6 +21,10 @@
         "https://news.ycombinator.com/newest?next=*",
         "https://news.ycombinator.com/news",
         "https://news.ycombinator.com/news?p=*",
+        "https://news.ycombinator.com/applyhn",
+        "https://news.ycombinator.com/applyhn?p=*",
+        "https://news.ycombinator.com/ask",
+        "https://news.ycombinator.com/ask?p=*",
         "https://news.ycombinator.com/submitted?id=*",
         "https://news.ycombinator.com/"
       ],
