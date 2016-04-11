@@ -17,6 +17,9 @@
       "run_at": "document_end",
       "matches": [
         "https://news.ycombinator.com/show",
+        "https://news.ycombinator.com/show?p=*",
+        "https://news.ycombinator.com/shownew",
+        "https://news.ycombinator.com/shownew?next=*",
         "https://news.ycombinator.com/newest",
         "https://news.ycombinator.com/newest?next=*",
         "https://news.ycombinator.com/news",
