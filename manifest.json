@@ -1,7 +1,7 @@
 {
   "name": "Sort Hacker News",
   "short_name": "hnsort",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "manifest_version": 2,
   "description": "Sort stories on Hacker News",
   "homepage_url": "http://wayneburkett.com",
