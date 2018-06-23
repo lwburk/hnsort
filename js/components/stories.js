@@ -53,9 +53,7 @@ var Stories = (function() {
             "articles": "tr.athing",
             "articlesTableBody": "tbody:first",
             "lastArticle": "tr.spacer:last",
-            "ageLinks": ".subtext a:contains(' ago')",
-            "commentLinks": ".subtext a:contains('comment')",
-            "jobPostingSubtext": ".subtext:not(:has(a))"
+            "commentLinks": ".subtext a:contains('comment')"
         });
    
         // returns an array of "story" meta-objects
@@ -70,8 +68,6 @@ var Stories = (function() {
 
         this.setupArticlesTable = function() {
             this.$node.addClass("articles");
-            this.select("ageLinks").addClass("age");
-            this.select("jobPostingSubtext").addClass("age");
             this.select("commentLinks").addClass("comments");
         };
 

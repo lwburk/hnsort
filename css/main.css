@@ -7,8 +7,7 @@
 }
 
 tbody.points .subtext .score,
-tbody.age .subtext.age, /* job posting */
-tbody.age .subtext .age,
+tbody.age .subtext span.age a,
 tbody.comments .subtext .comments {
     color: red;
 }

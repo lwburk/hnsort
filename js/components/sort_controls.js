@@ -30,6 +30,6 @@ var SortControls = (function() {
         });
     }
 
-    return flight.component(sortControls);
+    return flight.component(sortControls, withPageActions);
 
 })();
