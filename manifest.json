@@ -1,7 +1,7 @@
 {
   "name": "Sort Hacker News",
   "short_name": "hnsort",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "manifest_version": 2,
   "description": "Sort stories on Hacker News",
   "homepage_url": "http://wayneburkett.com",
@@ -13,6 +13,14 @@
   "default_locale": "en",
   "permissions": [
   ],
+  "page_action": {
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
   "content_scripts": [
     {
       "run_at": "document_end",
@@ -42,6 +50,7 @@
         "js/lib/jquery-2.1.4.min.js",
         "js/lib/mustache.min.js",
         "js/lib/flight.min.js",
+        "js/mixins/withPageActions.js",
         "js/components/stories.js",
         "js/components/sort_controls.js",
         "js/inject.js"
