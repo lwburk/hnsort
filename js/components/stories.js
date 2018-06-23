@@ -53,9 +53,7 @@ var Stories = (function() {
             "articles": "tr.athing",
             "articlesTableBody": "tbody:first",
             "lastArticle": "tr.spacer:last",
-            "ageLinks": ".subtext a:contains(' ago')",
-            "commentLinks": ".subtext a:contains('comment')",
-            "jobPostingSubtext": ".subtext:not(:has(a))"
+            "commentLinks": ".subtext a:contains('comment')"
         });
    
         // returns an array of "story" meta-objects
@@ -70,8 +68,6 @@ var Stories = (function() {
 
         this.setupArticlesTable = function() {
             this.$node.addClass("articles");
-            this.select("ageLinks").addClass("age");
-            this.select("jobPostingSubtext").addClass("age");
             this.select("commentLinks").addClass("comments");
         };
 
@@ -87,7 +83,7 @@ var Stories = (function() {
         this.renderSortControls = function() {
             var template = 
                 '<div id="sortLinks" class="sort-action">&nbsp;&nbsp;{{sort_by_label}}\
-                    <a href="#" data-key="#" class="selected">{{sort_by_number}}</a> |\
+                    <a href="#" data-key="rank" class="selected">{{sort_by_number}}</a> |\
                     <a href="#" data-key="points">{{sort_by_points}}</a> |\
                     <a href="#" data-key="age">{{sort_by_age}}</a> |\
                     <a href="#" data-key="comments">{{sort_by_comments}}</a>\
@@ -105,10 +101,7 @@ var Stories = (function() {
             var sortKey = $(element).data("key");
             var tbody = this.select("articlesTableBody");
             tbody.removeClass().addClass(sortKey);
-            this.sort(
-                tbody.get(0),
-                sortKey === "#" ? "rank" : sortKey, 
-                data.alreadySelected);
+            this.sort(tbody.get(0), sortKey, data.alreadySelected);
         };
 
         this.sort = function(tbody, sortKey, sorted) {
