@@ -42,7 +42,15 @@
         "https://news.ycombinator.com/ask",
         "https://news.ycombinator.com/ask?p=*",
         "https://news.ycombinator.com/submitted?id=*",
-        "https://news.ycombinator.com/"
+        "https://news.ycombinator.com/",
+        "https://news.ycombinator.com/front",
+        "https://news.ycombinator.com/front?day=*",
+        "https://news.ycombinator.com/best",
+        "https://news.ycombinator.com/best?p=*",
+        "https://news.ycombinator.com/active",
+        "https://news.ycombinator.com/active?p=*",
+        "https://news.ycombinator.com/noobstories",
+        "https://news.ycombinator.com/noobstories?next=*"
       ],
       "css": [
         "css/main.css"
