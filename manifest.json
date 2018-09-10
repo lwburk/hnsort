@@ -1,7 +1,7 @@
 {
   "name": "Sort Hacker News",
   "short_name": "hnsort",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "manifest_version": 2,
   "description": "Sort stories on Hacker News",
   "homepage_url": "http://wayneburkett.com",
@@ -42,7 +42,15 @@
         "https://news.ycombinator.com/ask",
         "https://news.ycombinator.com/ask?p=*",
         "https://news.ycombinator.com/submitted?id=*",
-        "https://news.ycombinator.com/"
+        "https://news.ycombinator.com/",
+        "https://news.ycombinator.com/front",
+        "https://news.ycombinator.com/front?day=*",
+        "https://news.ycombinator.com/best",
+        "https://news.ycombinator.com/best?p=*",
+        "https://news.ycombinator.com/active",
+        "https://news.ycombinator.com/active?p=*",
+        "https://news.ycombinator.com/noobstories",
+        "https://news.ycombinator.com/noobstories?next=*"
       ],
       "css": [
         "css/main.css"
